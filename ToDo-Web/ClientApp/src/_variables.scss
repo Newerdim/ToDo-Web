@@ -1,0 +1,71 @@
+$color-palette: (
+  primary: #FFF,
+  accent: #A64CFF,
+  secondary: #A64CFF,
+  dark: #333,
+  light: #FFF,
+  warning: #EC0000,
+  shadow: rgba(0, 0, 0, .25)
+);
+
+@function color($key: primary) {
+  @return map-get($color-palette, $key);
+}
+
+@each $name, $color in $color-palette {
+  .bg-#{$name} {
+    background-color: $color;
+  }
+}
+
+@each $name, $color in $color-palette {
+  .text-#{$name} {
+    color: $color;
+  }
+}
+
+
+// Spacing
+
+$spacer: 1em;
+
+$spacing: (
+  1: $spacer * 0.25,
+  2: $spacer * 0.5,
+  3: $spacer,
+  4: $spacer * 1.5,
+  5: $spacer * 3,
+);
+
+@function padding($key: 3) {
+  @return map-get($spacing, $key);
+}
+
+@function margin($key: 3) {
+  @return map-get($spacing, $key);
+}
+
+@each $key, $value in $spacing {
+  .p-#{$key} {
+    padding: $value;
+  }
+  .px-#{$key} {
+    padding-right: $value;
+    padding-left: $value;
+  }
+  .py-#{$key} {
+    padding-top: $value;
+    padding-bottom: $value;
+  }
+  .m-#{$key} {
+    margin: $value;
+  }
+  .mx-#{$key} {
+    margin-right: $value;
+    margin-left: $value;
+  }
+  .my-#{$key} {
+    margin-top: $value;
+    margin-bottom: $value;
+  }
+}
