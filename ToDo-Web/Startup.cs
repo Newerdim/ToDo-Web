@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -7,8 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using System.Net;
+using System.Text;
 using ToDo_Web.Data;
+using ToDo_Web.Helpers;
 
 namespace ToDo_Web
 {
@@ -38,6 +42,20 @@ namespace ToDo_Web
 
             //Add Database Context
             services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
+
+            services.AddScoped<IAuthRepository, AuthRepository>();
+
+            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(opt =>
+                    opt.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII
+                            .GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
+                        ValidateIssuer = false,
+                        ValidateAudience = false
+                    });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,6 +80,7 @@ namespace ToDo_Web
             app.UseAuthentication();
 
             app.UseHttpsRedirection();
+
             app.UseStaticFiles();
             if (!env.IsDevelopment())
             {
@@ -70,6 +89,8 @@ namespace ToDo_Web
 
             app.UseRouting();
             app.UseCors(opt => opt.AllowAnyOrigin());
+
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ToDo_Web.Dtos
 {
-    public class UserForRegisterDto
+    public class UserForRegistrationDto
     {
         [Required]
         public string FirstName { get; set; }
