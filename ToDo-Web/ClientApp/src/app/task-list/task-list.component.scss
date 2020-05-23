@@ -1,0 +1,29 @@
+@import '../../imports';
+
+:host {
+  flex: 1;
+}
+
+.task-list-group {
+  width: 100%;
+
+  .task-list {
+    .header {
+      @include flex(c, sb);
+      margin: margin(3) 0;
+
+      h3 {
+        margin: 0;
+        font-size: 2em;
+        font-weight: normal;
+      }
+
+      button.add {
+        font-size: 1.4em;
+
+        @include transparent-button();
+        @include hover-opacity();
+      }
+    }
+  }
+}

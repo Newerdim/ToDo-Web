@@ -1,0 +1,13 @@
+<div class="task">
+  <label class="check">
+    <input type="checkbox" [checked]="task.completed">
+    <div class="checkbox">
+      <svg class="icon checkmark" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M8 55.8L32.9 81 91 18" stroke="#000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+  </label>
+  <span class="title">{{ task.title | titlecase }}</span>
+  <div class="date">
+    <span *ngIf="display.includes('date')"> {{ task.date | date:'MMM dd' }}</span>
+    <span *ngIf="display.includes('time')"> {{ task.date | date:'HH:mm'}}</span>
+  </div>
+</div>

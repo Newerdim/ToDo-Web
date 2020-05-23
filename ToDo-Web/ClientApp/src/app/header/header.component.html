@@ -1,0 +1,25 @@
+<header>
+  <div class="flex">
+    <button class="bars" (click)="showNav()">
+      <svg class="icon" viewBox="0 0 100 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 5h100M0 30h100M0 55h100" stroke="#000" stroke-width="10" /></svg>
+    </button>
+    <a class="brand" routerLink="/">ToDo</a>
+  </div>
+  <label class="search">
+    <input type="text" class="search">
+    <button>
+      <svg class="icon" viewBox="0 0 94 98" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd"
+          d="M62.177 73.294A39.813 39.813 0 0140 80C17.909 80 0 62.091 0 40S17.909 0 40 0s40 17.909 40 40a39.852 39.852 0 01-10.255 26.745l22.143 22.143a5 5 0 01-7.072 7.07L62.465 73.608a5.096 5.096 0 01-.287-.313zM70 40c0 16.569-13.431 30-30 30-16.569 0-30-13.431-30-30 0-16.569 13.431-30 30-30 16.569 0 30 13.431 30 30z"
+          fill="#000" /></svg>
+    </button>
+  </label>
+  <a routerLink="/account" class="user">
+    <span class="welcome">Hi John</span>
+    <svg class="icon" viewBox="0 0 90 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" clip-rule="evenodd"
+        d="M58.175 56.96C68.14 52.08 75 41.841 75 30 75 13.431 61.569 0 45 0 28.431 0 15 13.431 15 30c0 11.842 6.861 22.081 16.825 26.96C16.525 61.636 4.689 74.25 1.115 90A45.148 45.148 0 000 100h10.015c-.01-.332-.015-.665-.015-1 0-18.778 15.67-34 35-34s35 15.222 35 34c0 .335-.005.668-.015 1H90c0-3.437-.385-6.784-1.115-10-3.574-15.75-15.41-28.363-30.71-33.04zM65 30c0 11.046-8.954 20-20 20s-20-8.954-20-20 8.954-20 20-20 20 8.954 20 20z"
+        fill="#000" /></svg>
+  </a>
+</header>

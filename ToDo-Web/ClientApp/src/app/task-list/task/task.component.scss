@@ -1,0 +1,68 @@
+@import '../../../imports';
+
+.task {
+  margin: margin(2) 0;
+  padding: padding(2) 0;
+  border-bottom: 1px solid color(accent);
+
+  @include flex(c);
+
+  label.check {
+    input[type="checkbox"] {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+
+      &:checked~.checkbox {
+        background: color(secondary);
+
+        .checkmark {
+          opacity: 1;
+        }
+      }
+    }
+
+    .checkbox {
+      border: 2px solid color(secondary);
+      border-radius: 5px;
+      width: 1.5em;
+      height: 1.5em;
+      transition: background-color .3s;
+      margin-right: margin(3);
+
+      @include flex-center();
+
+      .checkmark {
+        opacity: 0;
+        transition: opacity .3s;
+        width: 1em;
+
+        path {
+          stroke: color(primary);
+          stroke-width: 6;
+        }
+      }
+
+      &:hover {
+        background: rgba(color(secondary), .3);
+
+        .checkmark {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  .title {
+    flex: 1;
+  }
+
+  .date {
+    @include flex(c, c, c);
+    span {
+      font-size: 1em;
+    }
+  }
+}

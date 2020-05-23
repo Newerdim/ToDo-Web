@@ -1,0 +1,91 @@
+@import '../../imports';
+
+header {
+  overflow: hidden;
+  position: relative;
+  background-color: color();
+  padding: padding(3);
+
+  @include flex(c, sb, r);
+  @include box-shadow();
+
+  .bars {
+    @include transparent-button();
+    padding: padding(2);
+    margin-right: margin(2);
+
+    @include for-tablet-up {
+      display: none;
+    }
+
+    svg {
+      height: 1.1em;
+    }
+  }
+
+  .brand {
+    font-size: 1.5em;
+    font-weight: bold;
+    display: block;
+    opacity: 1;
+
+    @include for-phone-only {
+      display: none;
+    }
+  }
+
+  .search {
+    flex: 1;
+    max-width: 300px;
+    border: 1px solid color(accent);
+    border-radius: 30px;
+    font-size: 0.9em;
+    padding: padding(2) padding(3);
+    margin: 0 margin(2);
+
+    @include flex(c, sb, r);
+
+    @include for-tablet-up {
+      margin-left: 250px;
+    }
+
+    @include for-desktop-up {
+      max-width: 400px;
+    }
+
+    input {
+      width: calc(100% - 18px);
+      border: none;
+      padding: 0;
+      background-color: transparent;
+      margin-right: margin(2);
+      outline: transparent;
+      border-radius: 0;
+    }
+
+    button {
+      opacity: .8;
+
+      @include transparent-button();
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+
+  .user {
+    padding: padding(2);
+    font-size: 1.2em;
+
+    @include flex(c);
+
+    .welcome {
+      margin-right: margin(3);
+
+      @include for-phone-only {
+        display: none;
+      }
+    }
+  }
+}

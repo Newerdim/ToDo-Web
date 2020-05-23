@@ -43,7 +43,7 @@
 // Flexbox Self Align
 // Values: a (auto) | st (stretch) | s (flex-start) | e (flex-end) | c (center) | b (baseline)
 // Default: auto
-@mixin flex-align ($value: auto) {
+@mixin flex-self-align ($value: auto) {
   @if $value == st {
     align-self: stretch;
   } @else if $value == s {

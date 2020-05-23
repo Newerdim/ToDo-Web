@@ -28,3 +28,23 @@
 @mixin transform-origin ($origin) {
 	transform-origin: $origin;
 }
+
+@mixin transparent-button() {
+  background-color: transparent;
+  border: none;
+  outline: transparent;
+  @include flex-center();
+}
+
+@mixin box-shadow() {
+  box-shadow: 0 4px 6px color(shadow);
+}
+
+@mixin hover-opacity() {
+  opacity: .8;
+  transition: opacity .4s;
+
+  &:hover {
+    opacity: 1;
+  }
+}

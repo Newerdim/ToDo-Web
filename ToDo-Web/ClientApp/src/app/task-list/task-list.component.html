@@ -1,0 +1,16 @@
+<app-add-task></app-add-task>
+
+<div class="task-list-group">
+  <div class="task-list" *ngFor="let taskList of taskLists">
+    <div class="header">
+      <h3>{{ taskList.header | titlecase }}</h3>
+      <button class="add">
+        <svg class="icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M20 10c0 5.523-4.477 10-10 10S0 15.523 0 10 4.477 0 10 0s10 4.477 10 10zM9 11H5V9h4V5h2v4h4v2h-4v4H9v-4z"
+            fill="#A64CFF" /></svg>
+      </button>
+    </div>
+    <app-task *ngFor="let task of taskList.tasks" [task]="task" [display]="display"></app-task>
+  </div>
+</div>

@@ -1,11 +1,11 @@
 $color-palette: (
   primary: #FFF,
-  accent: #A64CFF,
+  accent: rgba(208, 208, 208, 60%),
   secondary: #A64CFF,
   dark: #333,
   light: #FFF,
   warning: #EC0000,
-  shadow: rgba(0, 0, 0, .25)
+  shadow: rgba(0, 0, 0, .10)
 );
 
 @function color($key: primary) {
