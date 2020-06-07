@@ -19,6 +19,6 @@ namespace ToDo_Web.Models
 
         public byte[] PasswordHash { get; set; }
 
-        public string Token { get; set; }
+        public ICollection<TaskGroupModel> TaskGroups { get; set; }
     }
 }

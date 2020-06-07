@@ -14,5 +14,9 @@ namespace ToDo_Web.Data
         { }
 
         public DbSet<User> Users { get; set; }
+
+        public DbSet<TaskModel> Tasks { get; set; }
+
+        public DbSet<TaskGroupModel> TaskGroups { get; set; }
     }
 }

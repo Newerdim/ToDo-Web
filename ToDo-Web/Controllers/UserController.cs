@@ -78,7 +78,14 @@ namespace ToDo_Web.Controllers
             {
                 FirstName = userForRegistrationDto.FirstName,
                 Username = userForRegistrationDto.Username,
-                Email = userForRegistrationDto.Email
+                Email = userForRegistrationDto.Email,
+                TaskGroups = new List<TaskGroupModel>
+                {
+                    new TaskGroupModel()
+                    {
+                        Name = "Inbox"
+                    }
+                }
             };
 
             var createdUser = await _repo.Register(userToCreate, userForRegistrationDto.Password);

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ToDo_Web.Data;
 
 namespace ToDo_Web.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20200524193328_ChangeRelationBetweenTaskTaskGroupAndUser")]
+    partial class ChangeRelationBetweenTaskTaskGroupAndUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,12 +31,7 @@ namespace ToDo_Web.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("TaskGroups");
                 });
@@ -55,15 +52,20 @@ namespace ToDo_Web.Migrations
                     b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("TaskGroupModelId")
+                    b.Property<int>("TaskGroupId")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("TaskGroupModelId");
+                    b.HasIndex("TaskGroupId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Tasks");
                 });
@@ -87,6 +89,9 @@ namespace ToDo_Web.Migrations
                     b.Property<byte[]>("PasswordSalt")
                         .HasColumnType("varbinary(max)");
 
+                    b.Property<string>("Token")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Username")
                         .HasColumnType("nvarchar(max)");
 
@@ -95,20 +100,17 @@ namespace ToDo_Web.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("ToDo_Web.Models.TaskGroupModel", b =>
-                {
-                    b.HasOne("ToDo_Web.Models.User", null)
-                        .WithMany("TaskGroups")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("ToDo_Web.Models.TaskModel", b =>
                 {
-                    b.HasOne("ToDo_Web.Models.TaskGroupModel", null)
+                    b.HasOne("ToDo_Web.Models.TaskGroupModel", "TaskGroup")
+                        .WithMany()
+                        .HasForeignKey("TaskGroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ToDo_Web.Models.User", null)
                         .WithMany("Tasks")
-                        .HasForeignKey("TaskGroupModelId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ToDo_Web.Data;
 
 namespace ToDo_Web.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20200525070639_ChangeRelationToUserTaskGroupTask")]
+    partial class ChangeRelationToUserTaskGroupTask
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,8 +35,6 @@ namespace ToDo_Web.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("TaskGroups");
                 });
@@ -61,9 +61,14 @@ namespace ToDo_Web.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("TaskGroupModelId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Tasks");
                 });
@@ -95,15 +100,6 @@ namespace ToDo_Web.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("ToDo_Web.Models.TaskGroupModel", b =>
-                {
-                    b.HasOne("ToDo_Web.Models.User", null)
-                        .WithMany("TaskGroups")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("ToDo_Web.Models.TaskModel", b =>
                 {
                     b.HasOne("ToDo_Web.Models.TaskGroupModel", null)
@@ -111,6 +107,10 @@ namespace ToDo_Web.Migrations
                         .HasForeignKey("TaskGroupModelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("ToDo_Web.Models.User", null)
+                        .WithMany("Tasks")
+                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }
